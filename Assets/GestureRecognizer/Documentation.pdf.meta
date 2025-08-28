@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 45a631ae4ae9c5445860bad8d56babb1
+timeCreated: 1508477097
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86410
+  packageName: Gesture Recognizer
+  packageVersion: 2.4
+  assetPath: Assets/GestureRecognizer/Documentation.pdf
+  uploadId: 261875

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: ba330caa69ed84d47a33f75e8f96e400
+timeCreated: 1490403786
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86410
+  packageName: Gesture Recognizer
+  packageVersion: 2.4
+  assetPath: Assets/GestureRecognizer/Scripts/Editor/GesturePatternEditor.cs
+  uploadId: 261875

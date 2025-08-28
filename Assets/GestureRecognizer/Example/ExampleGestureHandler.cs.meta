@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d281f7ec27afa064d83584f0a2dc659f
+timeCreated: 1506884256
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86410
+  packageName: Gesture Recognizer
+  packageVersion: 2.4
+  assetPath: Assets/GestureRecognizer/Example/ExampleGestureHandler.cs
+  uploadId: 261875

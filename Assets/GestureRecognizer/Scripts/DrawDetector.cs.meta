@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: e24b917f22f09f34195fca6db195d4b7
+timeCreated: 1508470805
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86410
+  packageName: Gesture Recognizer
+  packageVersion: 2.4
+  assetPath: Assets/GestureRecognizer/Scripts/DrawDetector.cs
+  uploadId: 261875

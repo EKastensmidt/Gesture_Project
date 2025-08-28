@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 7ce0fdb4e39b5744abf0c061bd2a3e30
+timeCreated: 1489934630
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86410
+  packageName: Gesture Recognizer
+  packageVersion: 2.4
+  assetPath: Assets/GestureRecognizer/Scripts/GesturePattern.cs
+  uploadId: 261875

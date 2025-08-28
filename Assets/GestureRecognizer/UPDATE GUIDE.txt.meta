@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 30539efc21293844ea869f93a2acb6fb
+timeCreated: 1508478022
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86410
+  packageName: Gesture Recognizer
+  packageVersion: 2.4
+  assetPath: Assets/GestureRecognizer/UPDATE GUIDE.txt
+  uploadId: 261875

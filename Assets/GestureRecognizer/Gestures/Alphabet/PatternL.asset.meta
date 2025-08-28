@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9d61d65c02275774d9c74e7724027fbb
+timeCreated: 1489934822
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86410
+  packageName: Gesture Recognizer
+  packageVersion: 2.4
+  assetPath: Assets/GestureRecognizer/Gestures/Alphabet/PatternL.asset
+  uploadId: 261875
