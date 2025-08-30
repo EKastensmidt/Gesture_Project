@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 392fc7146a8f1dd4eb9c65aaff0fd027, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
@@ -36,13 +36,14 @@ Material:
     - _Cutoff: 0
     - _EdgeIntensity: 4
     - _EdgeThickness: 8
-    - _EdgeThreshold: 0.381
-    - _JitterSpeed: 0.09
-    - _NoiseScale: 21.2
-    - _StrokeBreakup: 0.701
-    - _StrokeDensity: 4.86
+    - _EdgeThreshold: 0.5
+    - _FakeFPS: 4
+    - _JitterSpeed: 5
+    - _NoiseScale: 1
+    - _StrokeBreakup: 0.6
+    - _StrokeDensity: 1.57
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EdgeColor: {r: 1, g: 0, b: 0.03836775, a: 1}
+    - _EdgeColor: {r: 0, g: 0.08817625, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

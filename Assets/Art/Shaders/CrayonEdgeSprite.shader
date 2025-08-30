@@ -1,4 +1,4 @@
-Shader "Unlit/Crayon Edge Sprite"
+Shader "Unlit/Crayon Edge Only"
 {
     Properties
     {
@@ -17,6 +17,9 @@ Shader "Unlit/Crayon Edge Sprite"
         _JitterSpeed ("Jitter Speed", Range(0, 5)) = 0.7
         _StrokeDensity ("Stroke Density", Range(0.5, 6)) = 3.0
         _StrokeBreakup ("Stroke Breakup", Range(0, 1)) = 0.55
+
+        // Frame stepping for choppy "hand-drawn" look
+        _FakeFPS ("Stroke FPS", Range(1, 24)) = 4
 
         // Alpha handling
         _Cutoff ("Alpha Clip", Range(0,1)) = 0.001
@@ -56,13 +59,13 @@ Shader "Unlit/Crayon Edge Sprite"
             float  _EdgeThreshold;
 
             sampler2D _NoiseTex;
-            float4 _NoiseTex_TexelSize;
             float  _NoiseScale;
             float  _JitterSpeed;
             float  _StrokeDensity;
             float  _StrokeBreakup;
 
             float  _Cutoff;
+            float  _FakeFPS;
 
             struct appdata
             {
@@ -87,12 +90,10 @@ Shader "Unlit/Crayon Edge Sprite"
                 return o;
             }
 
-            // Sobel edge on alpha (in texture space), thickness in pixels
             float EdgeMaskAlpha(sampler2D tex, float2 uv)
             {
                 float2 px = _MainTex_TexelSize.xy * _EdgeThickness;
 
-                // Sample alpha in a 3x3 kernel
                 float a00 = tex2D(tex, uv + float2(-px.x, -px.y)).a;
                 float a10 = tex2D(tex, uv + float2( 0,     -px.y)).a;
                 float a20 = tex2D(tex, uv + float2( px.x,  -px.y)).a;
@@ -109,14 +110,11 @@ Shader "Unlit/Crayon Edge Sprite"
                 float gy = (a02 + 2*a12 + a22) - (a00 + 2*a10 + a20);
 
                 float g = sqrt(gx*gx + gy*gy);
-                // Emphasize edge and threshold
-                float edge = saturate((g * _EdgeIntensity) - _EdgeThreshold);
-                return edge;
+                return saturate((g * _EdgeIntensity) - _EdgeThreshold);
             }
 
             float hash21(float2 p)
             {
-                // tiny hash for subtle per-pixel variation even without noise
                 p = frac(p * float2(123.34, 456.21));
                 p += dot(p, p + 45.32);
                 return frac(p.x * p.y);
@@ -125,35 +123,28 @@ Shader "Unlit/Crayon Edge Sprite"
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 texCol = tex2D(_MainTex, i.uv) * i.color;
-                // Respect sprite transparency
                 clip(texCol.a - _Cutoff);
-
-                // Base color (unlit)
-                float3 baseRGB = texCol.rgb;
 
                 // Edge mask from alpha
                 float edge = EdgeMaskAlpha(_MainTex, i.uv);
 
-                // Hand-drawn breakup using noise + time jitter
-                float2 nUV = i.uv * _NoiseScale + _Time.y * _JitterSpeed;
+                // Quantized (stepped) time for choppy effect
+                float steppedTime = floor(_Time.y * _FakeFPS) / _FakeFPS;
+
+                // Jittered noise for hand-drawn breakup
+                float2 nUV = i.uv * _NoiseScale + steppedTime * _JitterSpeed;
                 float n = tex2D(_NoiseTex, nUV).r;
 
-                // Create “strokes” by quantizing noise into bands
                 float bands = _StrokeDensity;
                 float banded = frac(n * bands);
-                float stroke = smoothstep(_StrokeBreakup, 0.0, banded); // 1 in darker bands, 0 in lighter
+                float stroke = smoothstep(_StrokeBreakup, 0.0, banded);
 
-                // Add a tiny extra randomness so repeated tiles don’t look too uniform
                 float grain = hash21(i.uv * 1024.0);
 
-                // Final edge opacity
                 float edgeAlpha = saturate(edge * (0.65 + 0.35*grain)) * saturate(0.25 + 0.75*stroke);
 
-                // Composite: draw edge color *around* opaque areas; keep sprite color
-                float3 outRGB = baseRGB * (1 - edgeAlpha) + _EdgeColor.rgb * edgeAlpha;
-                float outA = texCol.a; // preserve sprite alpha
-
-                return fixed4(outRGB, outA);
+                // Only draw edges, not the fill
+                return fixed4(_EdgeColor.rgb, edgeAlpha * texCol.a);
             }
             ENDCG
         }
@@ -161,4 +152,3 @@ Shader "Unlit/Crayon Edge Sprite"
 
     FallBack "Unlit/Transparent"
 }
-
